@@ -1,53 +1,52 @@
 ﻿{
-  "info": {
-    "name": "BabiPoly API",
-    "description": "API for BabiPoly Game Management"
+  \"info\": {
+    \"name\": \"BabiPoly API\"
   },
-  "item": [
+  \"item\": [
     {
-      "name": "Authentication",
-      "item": [
+      \"name\": \"Authentication\",
+      \"item\": [
         {
-          "name": "Register User",
-          "request": {
-            "method": "POST",
-            "header": [
+          \"name\": \"Register User\",
+          \"request\": {
+            \"method\": \"POST\",
+            \"header\": [
               {
-                "key": "Content-Type",
-                "value": "application/json"
+                \"key\": \"Content-Type\",
+                \"value\": \"application/json\"
               }
             ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"name\":\"Test User\",\"email\":\"test@example.com\",\"password\":\"password123\",\"password_confirmation\":\"password123\"}"
+            \"body\": {
+              \"mode\": \"raw\",
+              \"raw\": \"{\\\"name\\\":\\\"Test\\\",\\\"email\\\":\\\"test@test.com\\\",\\\"password\\\":\\\"pass123\\\",\\\"password_confirmation\\\":\\\"pass123\\\"}\"
             },
-            "url": {
-              "raw": "http://localhost:8080/api/register",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["api", "register"]
+            \"url\": {
+              \"raw\": \"http://localhost:8080/api/register\",
+              \"host\": [\"localhost\"],
+              \"port\": \"8080\",
+              \"path\": [\"api\", \"register\"]
             }
           }
         },
         {
-          "name": "Login User",
-          "request": {
-            "method": "POST",
-            "header": [
+          \"name\": \"Login User\", 
+          \"request\": {
+            \"method\": \"POST\",
+            \"header\": [
               {
-                "key": "Content-Type",
-                "value": "application/json"
+                \"key\": \"Content-Type\",
+                \"value\": \"application/json\"
               }
             ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\"email\":\"test@example.com\",\"password\":\"password123\"}"
+            \"body\": {
+              \"mode\": \"raw\", 
+              \"raw\": \"{\\\"email\\\":\\\"test@test.com\\\",\\\"password\\\":\\\"pass123\\\"}\"
             },
-            "url": {
-              "raw": "http://localhost:8080/api/login",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["api", "login"]
+            \"url\": {
+              \"raw\": \"http://localhost:8080/api/login\",
+              \"host\": [\"localhost\"],
+              \"port\": \"8080\", 
+              \"path\": [\"api\", \"login\"]
             }
           }
         }
