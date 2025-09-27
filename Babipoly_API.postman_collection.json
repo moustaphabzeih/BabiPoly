@@ -1,56 +1,617 @@
 ﻿{
-  \"info\": {
-    \"name\": \"BabiPoly API\"
+  "info": {
+    "name": "BabiPoly API",
+    "description": "Complete e-commerce API for BabiPoly internship project - TESTED & WORKING",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
-  \"item\": [
+  "item": [
     {
-      \"name\": \"Authentication\",
-      \"item\": [
+      "name": "Authentication",
+      "description": "User registration and login endpoints",
+      "item": [
         {
-          \"name\": \"Register User\",
-          \"request\": {
-            \"method\": \"POST\",
-            \"header\": [
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
               {
-                \"key\": \"Content-Type\",
-                \"value\": \"application/json\"
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
               }
             ],
-            \"body\": {
-              \"mode\": \"raw\",
-              \"raw\": \"{\\\"name\\\":\\\"Test\\\",\\\"email\\\":\\\"test@test.com\\\",\\\"password\\\":\\\"pass123\\\",\\\"password_confirmation\\\":\\\"pass123\\\"}\"
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}"
             },
-            \"url\": {
-              \"raw\": \"http://localhost:8080/api/register\",
-              \"host\": [\"localhost\"],
-              \"port\": \"8080\",
-              \"path\": [\"api\", \"register\"]
+            "url": {
+              "raw": "http://localhost:8080/api/register",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "register"]
+            },
+            "description": "Register a new user account - TESTED & WORKING"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/register",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["api", "register"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n    \"message\": \"User registered successfully\",\n    \"user_id\": 1,\n    \"token\": \"1|hyjxXwt8tr2VYq6b0jekyBjQ4ZchqSYcmk9qPHOh206791e8\"\n}"
             }
-          }
+          ]
         },
         {
-          \"name\": \"Login User\", 
-          \"request\": {
-            \"method\": \"POST\",
-            \"header\": [
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [
               {
-                \"key\": \"Content-Type\",
-                \"value\": \"application/json\"
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
               }
             ],
-            \"body\": {
-              \"mode\": \"raw\", 
-              \"raw\": \"{\\\"email\\\":\\\"test@test.com\\\",\\\"password\\\":\\\"pass123\\\"}\"
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
             },
-            \"url\": {
-              \"raw\": \"http://localhost:8080/api/login\",
-              \"host\": [\"localhost\"],
-              \"port\": \"8080\", 
-              \"path\": [\"api\", \"login\"]
+            "url": {
+              "raw": "http://localhost:8080/api/login",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "login"]
+            },
+            "description": "Login user and get authentication token - TESTED & WORKING"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password123\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/login",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["api", "login"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"Test User\",\n            \"email\": \"test@example.com\"\n        },\n        \"access_token\": \"2|haUMjx1AljLCnpStkuTsqH2ghEP3Gkzu7uaL4NFQ0243739f\",\n        \"token_type\": \"Bearer\"\n    }\n}"
             }
+          ]
+        },
+        {
+          "name": "Logout User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}",
+                "description": "Use token from login response"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/logout",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "logout"]
+            },
+            "description": "Logout user and invalidate token"
           }
         }
       ]
+    },
+    {
+      "name": "Categories",
+      "description": "Category management endpoints - TESTED & WORKING",
+      "item": [
+        {
+          "name": "Get All Categories",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/categories",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "categories"]
+            },
+            "description": "Get all categories with their products - TESTED & WORKING"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer 2|haUMjx1AljLCnpStkuTsqH2ghEP3Gkzu7uaL4NFQ0243739f"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8080/api/categories",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["api", "categories"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Electronics\",\n        \"created_at\": \"2025-09-27T16:44:07.000000Z\",\n        \"updated_at\": \"2025-09-27T16:44:07.000000Z\",\n        \"products\": [\n            {\n                \"id\": 1,\n                \"name\": \"Smartphone\",\n                \"description\": \"Latest smartphone model\",\n                \"price\": 699.99,\n                \"category_id\": 1,\n                \"created_at\": \"2025-09-27T16:45:13.000000Z\",\n                \"updated_at\": \"2025-09-27T16:45:13.000000Z\"\n            }\n        ]\n    }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Electronics\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/categories",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "categories"]
+            },
+            "description": "Create a new category - TESTED & WORKING"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer 2|haUMjx1AljLCnpStkuTsqH2ghEP3Gkzu7uaL4NFQ0243739f"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Electronics\"\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/categories",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["api", "categories"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n    \"name\": \"Electronics\",\n    \"updated_at\": \"2025-09-27T16:44:07.000000Z\",\n    \"created_at\": \"2025-09-27T16:44:07.000000Z\",\n    \"id\": 1\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Single Category",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/categories/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "categories", "1"]
+            },
+            "description": "Get a specific category by ID"
+          }
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Electronics\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/categories/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "categories", "1"]
+            },
+            "description": "Update a category name"
+          }
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/categories/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "categories", "1"]
+            },
+            "description": "Delete a category"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "description": "Product management endpoints - TESTED & WORKING",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "products"]
+            },
+            "description": "Get all products with their categories - TESTED & WORKING"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer 2|haUMjx1AljLCnpStkuTsqH2ghEP3Gkzu7uaL4NFQ0243739f"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["api", "products"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Smartphone\",\n        \"description\": \"Latest smartphone model\",\n        \"price\": 699.99,\n        \"category_id\": 1,\n        \"created_at\": \"2025-09-27T16:45:13.000000Z\",\n        \"updated_at\": \"2025-09-27T16:45:13.000000Z\",\n        \"category\": {\n            \"id\": 1,\n            \"name\": \"Electronics\",\n            \"created_at\": \"2025-09-27T16:44:07.000000Z\",\n            \"updated_at\": \"2025-09-27T16:44:07.000000Z\"\n        }\n    }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Smartphone\",\n  \"description\": \"Latest smartphone model\",\n  \"price\": 699.99,\n  \"category_id\": 1\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "products"]
+            },
+            "description": "Create a new product (requires existing category) - TESTED & WORKING"
+          },
+          "response": [
+            {
+              "name": "Success Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer 2|haUMjx1AljLCnpStkuTsqH2ghEP3Gkzu7uaL4NFQ0243739f"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Smartphone\",\n  \"description\": \"Latest smartphone model\",\n  \"price\": 699.99,\n  \"category_id\": 1\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:8080/api/products",
+                  "host": ["localhost"],
+                  "port": "8080",
+                  "path": ["api", "products"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n    \"name\": \"Smartphone\",\n    \"description\": \"Latest smartphone model\",\n    \"price\": 699.99,\n    \"category_id\": 1,\n    \"updated_at\": \"2025-09-27T16:45:13.000000Z\",\n    \"created_at\": \"2025-09-27T16:45:13.000000Z\",\n    \"id\": 1\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Single Product",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/products/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "products", "1"]
+            },
+            "description": "Get a specific product by ID"
+          }
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Smartphone\",\n  \"price\": 799.99\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/products/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "products", "1"]
+            },
+            "description": "Update a product"
+          }
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/products/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "products", "1"]
+            },
+            "description": "Delete a product"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "description": "Order management endpoints",
+      "item": [
+        {
+          "name": "Get All Orders",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/orders",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "orders"]
+            },
+            "description": "Get all orders with user and order items"
+          }
+        },
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_date\": \"2025-09-27 18:00:00\",\n  \"status\": \"pending\",\n  \"items\": [\n    {\n      \"product_id\": 1,\n      \"quantity\": 2,\n      \"price\": 699.99\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/orders",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "orders"]
+            },
+            "description": "Create a new order with order items"
+          }
+        },
+        {
+          "name": "Get Single Order",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/orders/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "orders", "1"]
+            },
+            "description": "Get a specific order by ID"
+          }
+        },
+        {
+          "name": "Update Order",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"completed\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/orders/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "orders", "1"]
+            },
+            "description": "Update order status"
+          }
+        },
+        {
+          "name": "Delete Order",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{auth_token}}"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/orders/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "orders", "1"]
+            },
+            "description": "Delete an order"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "auth_token",
+      "value": "2|haUMjx1AljLCnpStkuTsqH2ghEP3Gkzu7uaL4NFQ0243739f",
+      "description": "Authentication token from login response - ACTUAL TESTED TOKEN"
     }
   ]
 }
