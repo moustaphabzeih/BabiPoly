@@ -1,61 +1,71 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# BabiPoly - E-commerce API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A complete Laravel backend API for the BabiPoly internship project. This is a fully functional e-commerce API with user authentication, product management, categories, orders, and an admin panel.
 
-## About Laravel
+## 🚀 Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **User Authentication** (Register/Login/Logout with Laravel Sanctum)
+- **Product Management** (Full CRUD operations)
+- **Category Management** (Full CRUD operations)  
+- **Order Management** (Full CRUD operations with order items)
+- **Admin Panel** (Filament PHP)
+- **RESTful API Design** with proper HTTP status codes
+- **Token-based Authentication** (Laravel Sanctum)
+- **Database Relationships** (Eloquent ORM)
+- **Input Validation** with custom error messages
+- **API Documentation** (Postman collection)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📋 Complete API Endpoints
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🔐 Authentication
+- `POST /api/register` - User registration with validation
+- `POST /api/login` - User login with token generation
+- `POST /api/logout` - User logout (token invalidation)
 
-## Learning Laravel
+### 📂 Categories Management
+- `GET /api/categories` - List all categories with their products
+- `POST /api/categories` - Create a new category
+- `GET /api/categories/{id}` - Get specific category with products
+- `PUT /api/categories/{id}` - Update category information
+- `DELETE /api/categories/{id}` - Delete a category
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 📦 Products Management
+- `GET /api/products` - List all products with their categories
+- `POST /api/products` - Create a new product (requires category)
+- `GET /api/products/{id}` - Get specific product with category
+- `PUT /api/products/{id}` - Update product information
+- `DELETE /api/products/{id}` - Delete a product
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 🛒 Orders Management
+- `GET /api/orders` - List all orders with user and order items
+- `POST /api/orders` - Create a new order with multiple items
+- `GET /api/orders/{id}` - Get specific order with details
+- `PUT /api/orders/{id}` - Update order status
+- `DELETE /api/orders/{id}` - Delete an order
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🗃️ Database Schema
 
-## Laravel Sponsors
+### Entities and Relationships:
+- **Users** 👤 → **Orders** 🛒 (One-to-Many)
+- **Orders** 🛒 → **OrderItems** 📦 (One-to-Many) 
+- **OrderItems** 📦 → **Products** 📱 (Many-to-One)
+- **Categories** 📂 → **Products** 📱 (One-to-Many)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Key Tables:
+- `users` - User authentication and profiles
+- `categories` - Product categorization
+- `products` - Product information with pricing
+- `orders` - Order headers with status
+- `order_items` - Individual order line items
 
-### Premium Partners
+## 🛠️ Installation & Setup
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Prerequisites
+- PHP 8.0+
+- Composer
+- SQLite Database
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 1. Clone the Repository
+```bash
+git clone https://github.com/moustaphabzeih/BabiPoly.git
+cd BabiPoly
